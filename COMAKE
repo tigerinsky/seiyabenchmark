@@ -1,0 +1,19 @@
+#edit-mode: -*- python -*-
+#coding:utf8
+
+CXX('g++')
+CXXFLAGS('-std=c++11 -D_GNU_SOURCE -D__STDC_LIMIT_MACROS -g -pipe -W -Wall -fPIC -fno-omit-frame-pointer')
+LDFLAGS('-ldl -lpthread -lm -lrt')
+
+#DEP('common_lib', '1.0.5')
+INCLUDE(GLOB('./'))
+INCLUDE(GLOB('./deps/include/'))
+
+DEP_LIB(GLOB('./deps/lib/*.a'))
+
+
+headers = GLOB('*.h')
+sources = GLOB('redis-benchmark.cpp ae.c anet.c adlist.c sds.c *.cpp')
+
+APP('demo', sources) 
+#STATIC_LIB('monitor', sources, headers)
