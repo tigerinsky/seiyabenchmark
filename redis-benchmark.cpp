@@ -268,7 +268,8 @@ static void readHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
         fprintf(stderr,"Error: %s\n",c->context->errstr);
         sdsfree(c->context->reader->buf);
         c->context->reader->buf = sdsempty();
-        exit(1);
+        LOG_ERROR << c->context->errstr << "conn_id[" << c->conn_id << "]";
+        return;
     } else {
         int i = 0;
         while(c->pending) {
